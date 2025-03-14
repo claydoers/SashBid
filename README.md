@@ -189,7 +189,7 @@ SashBid/
 
 ## Development Credits
 
-Developed with ❤️ by [Waxie](https://github.com/waxie)
+Developed with ❤️ by [Claydoers](https://github.com/claydoers)
 
 ## License
 
