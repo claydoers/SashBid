@@ -66,30 +66,36 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = async (username: string, password: string): Promise<boolean> => {
     setLoading(true);
     
-    // Simple authentication logic
-    // In a real app, this would be an API call to your backend
-    if (username === 'Clay' && password === 'Test123') {
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
-      const userData: User = {
-        username: 'Clay',
-        name: 'Clay Johnson',
-        role: 'Admin'
-      };
-      
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: username, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setLoading(false);
+        return false;
+      }
+
       // Store auth state in localStorage
       localStorage.setItem('isAuthenticated', 'true');
-      localStorage.setItem('user', JSON.stringify(userData));
+      localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem('token', data.token);
       
-      setUser(userData);
+      setUser(data.user);
       setIsAuthenticated(true);
       setLoading(false);
       return true;
+    } catch (error) {
+      console.error('Login error:', error);
+      setLoading(false);
+      return false;
     }
-    
-    setLoading(false);
-    return false;
   };
 
   const logout = () => {

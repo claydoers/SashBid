@@ -1,4 +1,4 @@
-// File: /Users/alexisdoerschlag/Desktop/cursor_project/window-door-bidding-app/frontend/app/layout.tsx
+// File: /Users/clay/Repos/SashBid/frontend/app/layout.tsx
 import * as entry from '../../../app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
